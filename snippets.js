@@ -2,11 +2,11 @@ import {
     connect
 } from 'cloudflare:sockets';
 
-const UUID = '1f9d104e-ca0e-4202-ba4b-a0afb969c747';
+const UUID = 'a48a25e1-42a7-42c9-a3af-7524ba49760c';
 // 反向代理IP，无法访问时通过代理访问
-const DEFAULT_PROXY_IP = 'bestproxy.030101.xyz:443'; // 来源：https://ipdb.030101.xyz/bestdomain/
+const DEFAULT_PROXY_IP = 'proxy.xxxxxxxx.tk:50001'; // 来源：https://ipdb.030101.xyz/bestdomain/
 // 优选域名/IP
-const BEST_DOMAINS = ['bestcf.030101.xyz:443', 'japan.com:443', 'www.visa.com.sg:443', "www.visa.com.hk:443", "icook.hk:443", "icook.tw:443"]
+const BEST_DOMAINS = ['saas.sin.fan:443',  'youxuan.cf.090227.xyz:443', "mfa.gov.ua:443", "cf.877774.xyz:443", "www.shopify.com:443"]
 
 
 export default {
