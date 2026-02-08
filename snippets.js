@@ -6,7 +6,13 @@ const UUID = 'a48a25e1-42a7-42c9-a3af-7524ba49760c';
 // 反向代理IP，无法访问时通过代理访问
 const DEFAULT_PROXY_IP = 'proxy.xxxxxxxx.tk:50001'; // 来源：https://ipdb.030101.xyz/bestdomain/
 // 优选域名/IP
-const BEST_DOMAINS = ['saas.sin.fan:443',  'youxuan.cf.090227.xyz:443', "mfa.gov.ua:443", "cf.877774.xyz:443", "www.shopify.com:443"]
+const BEST_DOMAINS = [
+  'saas.sin.fan:443#HK',
+  'youxuan.cf.090227.xyz:443#SG',
+  'mfa.gov.ua:443#JP',
+  'cf.877774.xyz:443#KR',
+  'www.shopify.com:443#US'
+];
 
 
 export default {
@@ -41,16 +47,15 @@ async function handle_sub(req) {
         },
     });
 }
-
 function gen_links(workerDomain) {
     let links = [];
-    let i = 0;
     const wsPath = encodeURIComponent('/?ed=2048');
-    const proto = atob("dmxlc3M=")
+    const proto = atob("dmxlc3M=");
 
     BEST_DOMAINS.forEach(item => {
-        i += 1;
-        let name = "snippet_" + i;
+        // item 格式： 域名:端口#节点名
+        const [host, name] = item.split('#');
+
         const wsParams = new URLSearchParams({
             encryption: 'none',
             security: 'tls',
@@ -60,11 +65,14 @@ function gen_links(workerDomain) {
             host: workerDomain,
             path: wsPath
         });
-        links.push(`${proto}://${UUID}@${item}?${wsParams.toString()}#${encodeURIComponent(name)}`);
-    })
+
+        links.push(
+            `${proto}://${UUID}@${host}?${wsParams.toString()}#${encodeURIComponent(name)}`
+        );
+    });
+
     return links;
 }
-
 async function handle_ws(req) {
     const [client, ws] = Object.values(new WebSocketPair());
     ws.accept();
